@@ -3,6 +3,8 @@ name: Code Checkout Only
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   checkout-code:
