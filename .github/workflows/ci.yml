@@ -1,22 +1,18 @@
-name: HTML CI Check
+name: Code Checkout Only
 
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
-  validate:
+  checkout-code:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Checkout Code
+      - name: ⬇️ Checkout Repository Code
         uses: actions/checkout@v3
 
-      - name: 🧪 Validate HTML with Docker Validator
-        run: |
-          docker run --rm -v "${{ github.workspace }}:/mnt" ghcr.io/svenstaro/html5validator \
-            --root /mnt \
-            --show-warnings
+      - name: ✅ Print directory structure
+        run: ls -R
+
 
