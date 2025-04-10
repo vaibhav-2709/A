@@ -1,6 +1,7 @@
 docker build -t html-docker-app .
 
-docker build -t html-docker-app .
+docker run -d -p 8080:80 html-docker-app
+
 
 # Use official Nginx image
 FROM nginx:alpine
