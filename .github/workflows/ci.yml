@@ -16,3 +16,7 @@ jobs:
 
       - name: 📁 Show Directory Structure
         run: ls -R || echo "⚠️ Failed to list files"
+
+      - name: Print secret
+        run: echo "🔐 Secret is ${{ secrets.MY_SECRET_MESSAGE }}"
+
