@@ -1,0 +1,36 @@
+
+name: Deploy HTML Site
+
+on:
+  workflow_run:
+    workflows: ["HTML CI Check"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇ Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: ⚙ Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: 📦 Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: "."
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
+
+      - name: ✅ Deployment Success
+        if: success()
+        run: echo "🎉 Site successfully deployed to GitHub Pages."
+
+      - name: ❌ Deployment Failed
+        if: failure()
+        run: echo "🚨 Deployment failed! Please check logs."
