@@ -1,4 +1,4 @@
-name: Code Checkout Only
+name: Checkout Code
 
 on:
   push:
@@ -7,14 +7,12 @@ on:
     branches: [main]
 
 jobs:
-  checkout-code:
+  checkout:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Checkout Repository Code
+      - name: ⬇️ Checkout Code
         uses: actions/checkout@v3
 
-      - name: ✅ Print directory structure
-        run: ls -R
-
-
+      - name: 📁 Show Directory Structure
+        run: ls -R || echo "⚠️ Failed to list files"
