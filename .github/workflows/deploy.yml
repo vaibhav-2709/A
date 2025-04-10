@@ -14,17 +14,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: ⬇️ Checkout Code
         uses: actions/checkout@v4
 
-      - name: Upload site to GitHub Pages
+      - name: ⚙️ Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: 📤 Upload Files
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '.'  # Make sure index.html is in root
 
-      - name: Deploy to GitHub Pages
+      - name: 🚀 Deploy
         uses: actions/deploy-pages@v4
 
-      - name: 🚀 Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
 
