@@ -1,0 +1,30 @@
+name: Minikube CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  setup-minikube:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v4
+
+    - name: Install Minikube
+      run: |
+        curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+    - name: Start Minikube
+      run: |
+        minikube start --driver=none
+
+    - name: Deploy HTML App
+      run: |
+        kubectl create deployment html-app --image=nginx
+        kubectl expose deployment html-app --type=NodePort --port=80
+        minikube service html-app --url
